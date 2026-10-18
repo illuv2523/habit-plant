@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Трекер привычек</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <p class="eyebrow">Оранжерея привычек</p>
+          <h1>Трекер привычек</h1>
+        </div>
+      </div>
+      <nav class="tabs" aria-label="Разделы">
+        <button type="button" class="tab is-active" data-action="tab" data-tab="home" aria-current="page">Главная</button>
+        <button type="button" class="tab" data-action="tab" data-tab="greenhouse">Моя оранжерея</button>
+      </nav>
+      <button type="button" class="theme-btn" data-action="theme" aria-label="Включить тёмную тему">
+        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-label">Тёмная</span>
+      </button>
+    </header>
+
+    <section id="view-home" class="view">
+      <div class="home-grid">
+        <article class="panel plant-panel">
+          <div id="plant-widget"></div>
+        </article>
+        <article class="panel habit-panel">
+          <div class="panel-head">
+            <div>
+              <h2>Привычки на сегодня</h2>
+              <p id="today-label" class="muted"></p>
+            </div>
+            <button type="button" class="btn btn-primary" data-action="open-habit">Новая привычка</button>
+          </div>
+          <ul id="habit-list" class="habit-list"></ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="view-greenhouse" class="view" hidden>
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Моя оранжерея</h2>
+            <p class="muted">Коллекция выращенных растений, доступные к посадке и ещё закрытые виды.</p>
+          </div>
+          <p id="collection-count" class="count-pill"></p>
+        </div>
+        <div id="plant-grid" class="plant-grid"></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Достижения</h2>
+            <p class="muted">Карточки, которые открываются по пути садовника.</p>
+          </div>
+        </div>
+        <div id="achievement-grid" class="achievement-grid"></div>
+      </article>
+    </section>
+  </div>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <div id="modal-habit" class="modal" hidden>
+    <div class="modal-backdrop" data-action="close-modal"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="habit-title">
+      <h2 id="habit-title">Новая привычка</h2>
+      <p class="muted">Название, регулярность и бонус к базовым 10 XP.</p>
+      <form id="habit-form">
+        <label class="field">
+          <span>Название</span>
+          <input name="name" maxlength="40" required placeholder="Например, стакан воды" autocomplete="off" />
+        </label>
+        <label class="field">
+          <span>Регулярность</span>
+          <select name="regularity" id="regularity">
+            <option value="daily">Каждый день</option>
+            <option value="weekdays">По будням</option>
+            <option value="weekends">По выходным</option>
+            <option value="custom">Выбранные дни</option>
+          </select>
+        </label>
+        <fieldset id="day-picker" class="day-picker" hidden>
+          <legend>Дни недели</legend>
+          <div class="day-row" id="day-row"></div>
+        </fieldset>
+        <label class="field">
+          <span>Очковый бонус</span>
+          <select name="bonus">
+            <option value="0">+0 XP</option>
+            <option value="5">+5 XP</option>
+            <option value="10">+10 XP</option>
+            <option value="15">+15 XP</option>
+          </select>
+        </label>
+        <p class="hint">За выполнение: 10 XP плюс выбранный бонус.</p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" data-action="close-modal">Отмена</button>
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-plant" class="modal" hidden>
+    <div class="modal-backdrop" data-action="close-modal"></div>
+    <div class="modal-card modal-card--wide" role="dialog" aria-modal="true" aria-labelledby="plant-modal-title">
+      <div id="plant-modal-body"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-action="close-modal">Позже</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
